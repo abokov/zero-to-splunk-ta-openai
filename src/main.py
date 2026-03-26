@@ -24,14 +24,6 @@ def main():
         print("Error: OPENAI_API_KEY environment variable not set. Please add it to your .env file.")
         return
 
- 
-    # Log token usage before the API call!
-    input_tokens = count_tokens(api_spec_content)
-    est_cost = estimate_cost(input_tokens)
-    print(f"📊 Analyzing API Spec: {input_tokens:,} tokens (Est. Input Cost: ${est_cost:.5f})")
-    
-    print("🚀 Calling OpenAI API...")
-
     # 1. Read API Spec
     try:
         with open(args.spec, "r") as f:
@@ -40,9 +32,13 @@ def main():
         print(f"Error: Could not find file {args.spec}")
         return
 
-    print("🚀 Analyzing API spec and generating code via OpenAI...")
+    # Log token usage before the API call!
+    input_tokens = count_tokens(api_spec_content)
+    est_cost = estimate_cost(input_tokens)
+    print(f"📊 Analyzing API Spec: {input_tokens:,} tokens (Est. Input Cost: ${est_cost:.5f})")
     
-    # 2. Call OpenAI API
+    print("🚀 Calling OpenAI API...")
+
     ta_config = generate_ta_code(api_spec_content)
     
     # 3. Setup Output Directory
