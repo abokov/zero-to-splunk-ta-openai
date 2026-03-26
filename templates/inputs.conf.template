@@ -1,0 +1,5 @@
+[{{ input_name }}://default]
+interval = {{ interval }}
+sourcetype = {{ sourcetype }}
+index = default
+disabled = 0
